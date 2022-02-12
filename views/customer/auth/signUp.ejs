@@ -1,5 +1,6 @@
 <%- include('../includes/head', {dynamicTitle: 'Sign Up'}) %>
-
+<link rel="stylesheet" href="/styles/form.css">
+<link rel="stylesheet" href="/styles/auth.css">
 </head>
 <%- include('../includes/nav-bar') %>
 <body>
@@ -14,7 +15,6 @@
                 <label for="email-confirm">Confirm your email:</label>
                 <input type="email" id="email-confirm" name="email-confirm" required>
             </div>
-            <hr>
             <div>
                 <label for="password">Enter a password:</label>
                 <input type="password" id="password" name="password" minlength="6" required>
@@ -23,6 +23,7 @@
                 <label for="password-confirm">confirm your password:</label>
                 <input type="password" id="password-confirm" name="password-confirm" minlength="6" required>
             </div>
+            <hr>
             <div>
                 <label for="full-name">Enter your full name:</label>
                 <input type="text" id="full-name" name="full-name" required>
