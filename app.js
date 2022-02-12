@@ -5,14 +5,14 @@ const express = require("express");
 const csrf = require("csurf"); */
 const app = express();
 
-const db = require("./data/database");
+const db = require("./database/database");
 const authRoute = require('./routes/auth-route');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.static("public"));
-app.use(express.urlencoded({ extended: false }));
+/* app.use(express.static("public"));
+app.use(express.urlencoded({ extended: false })); */
 
 //const mongodbSessionStore = sessionConfig.sessionKey(session);
 
@@ -27,9 +27,9 @@ app.use(csrfMW); */
 
 app.use(authRoute);
 
-app.use(function (error, req, res, next) {
+/* app.use(function (error, req, res, next) {
   res.render("500");
-});
+}); */
 
 db.connectToDatabase().then(function () {
   app.listen(3000);

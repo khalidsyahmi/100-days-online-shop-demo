@@ -1,0 +1,53 @@
+<%- include('../includes/head', {dynamicTitle: 'Sign Up'}) %>
+
+</head>
+<%- include('../includes/nav-bar') %>
+<body>
+    <main>
+        <h1>Create New Account</h1>
+        <form action="" method="">
+            <div>
+                <label for="email">Enter your email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="email-confirm">Confirm your email:</label>
+                <input type="email" id="email-confirm" name="email-confirm" required>
+            </div>
+            <hr>
+            <div>
+                <label for="password">Enter a password:</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+            </div>
+            <div>
+                <label for="password-confirm">confirm your password:</label>
+                <input type="password" id="password-confirm" name="password-confirm" minlength="6" required>
+            </div>
+            <div>
+                <label for="full-name">Enter your full name:</label>
+                <input type="text" id="full-name" name="full-name" required>
+            </div>
+            <div>
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" required>
+            </div>
+            <div>
+                <label for="postal-code">Postal Code:</label>
+                <input 
+                type="text" 
+                id="postal-code" 
+                name="postal-code" 
+                minlength="5"
+                maxlength="5"
+                required>
+            </div>
+            <div>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            <button class="btn">Sign Up</button>
+            <p id="switch-form"><a href="/signIn">Sign In instead</a></p>
+        </form>
+    </main>
+
+<%- include('../includes/footer') %>

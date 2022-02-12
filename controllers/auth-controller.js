@@ -1,15 +1,15 @@
 
 
-function getHome() {
+function getHome(req, res) {
 
 }
 
 function getSignUp(req, res) {
-
+    res.render('customer/auth/signUp');
 }
 
-function getSignIn() {
-
+function getSignIn(req, res) {
+    res.render('customer/auth/signIn');
 }
 
 module.exports = {
