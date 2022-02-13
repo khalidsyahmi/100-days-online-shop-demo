@@ -1,0 +1,23 @@
+<%- include('../includes/head', {dynamicTitle: 'Sign In'}) %>
+<link rel="stylesheet" href="/styles/form.css">
+<link rel="stylesheet" href="/styles/auth.css">
+</head>
+<%- include('../includes/nav-bar') %>
+<body>
+    <main>
+        <h1>Sign In</h1>
+        <form action="/signIn" method="POST">
+            <div>
+                <label for="email">Enter your email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="password">Enter a password:</label>
+                <input type="password" id="password" name="password" minlength="6" required>
+            </div>
+            <hr>
+            <button class="btn">Log In</button>
+            <p id="switch-form"><a href="/signUp">Create a new user</a></p>
+        </form>
+    </main>
+<%- include('../includes/footer') %>

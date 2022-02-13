@@ -7,6 +7,8 @@ router.get('/', authContr.getHome);
 
 router.get('/signUp', authContr.getSignUp);
 
+router.post('/signUp', authContr.createAccount);
+
 router.get('/signIn', authContr.getSignIn);
 
 module.exports = router;

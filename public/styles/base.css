@@ -9,15 +9,15 @@ html {
 
     --color-gray-50: rgb(243, 236, 230);
     --color-gray-100: rgb(205, 195, 207);
-    --color-gray-300: rgb(99, 92, 86);
+    --color-gray-300: rgb(153, 140, 129);
     --color-gray-400: rgb(70, 65, 60);
     --color-gray-500: rgb(37, 34, 31);
-    --color-gray-600: rgb(32, 29, 26);
+    --color-gray-600: rgb(70, 64, 59);
     --color-gray-700: rgb(31, 26, 22);
   
     --color-primary-50: rgb(253, 224, 200);
     --color-primary-100: rgb(253, 214, 183);
-    --color-primary-200: rgb(250, 191, 143);
+    --color-primary-200: rgb(250, 143, 196);
     --color-primary-400: rgb(223, 41, 199);
     --color-primary-500: rgb(212, 14, 123);
     --color-primary-700: rgb(173, 13, 93);
