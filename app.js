@@ -1,8 +1,8 @@
 const path = require("path");
 
 const express = require("express");
-/* const session = require("express-session"); */
 const csrf = require("csurf");
+const session = require("express-session");
 const app = express();
 
 const db = require("./database/database");
@@ -10,6 +10,7 @@ const authRoute = require('./routes/auth-route');
 
 const csrfMW = require('./middlewares/csrf-token-mw');
 const authMW = require("./middlewares/auth-mw");
+const errMW = require('./middlewares/error-handler');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -28,9 +29,11 @@ app.use(authMW);
 
 app.use(authRoute);
 
-app.use(function (error, req, res, next) {
+/* app.use(function (error, req, res, next) {
   res.render("500");
-});
+}); */
+app.use(errMW);
+
 
 db.connectToDatabase().then(function () {
   app.listen(3000);

@@ -1,12 +1,13 @@
-<%- include('../includes/head', {dynamicTitle: 'Sign Up'}) %>
+<%- include('../../shared/includes/head', {dynamicTitle: 'Sign Up'}) %>
 <link rel="stylesheet" href="/styles/form.css">
 <link rel="stylesheet" href="/styles/auth.css">
 </head>
-<%- include('../includes/nav-bar') %>
+<%- include('../../shared/includes/nav-bar') %>
 <body>
     <main>
         <h1>Create New Account</h1>
         <form action="/signUp" method="POST">
+            <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             <div>
                 <label for="email">Enter your email:</label>
                 <input type="email" id="email" name="email" required>
@@ -51,4 +52,4 @@
         </form>
     </main>
 
-<%- include('../includes/footer') %>
+<%- include('../../shared/includes/footer') %>
