@@ -1,8 +1,9 @@
 const UserModel = require('../models/user-model');
+const authUtil = require('../util/authentication-util');
 
-function getHome(req, res) {
+/* function getHome(req, res) {
 
-}
+} */
 
 function getSignUp(req, res) {
     res.render('customer/auth/signUp');
@@ -32,9 +33,32 @@ function getSignIn(req, res) {
     res.render('customer/auth/signIn');
 }
 
+async function logIn(req, res) {
+    const user = new UserModel(req.body.email, req.body.password);
+    const existingUser = await user.getyUserSameEmail();
+
+    if (!existingUser) {
+        return res.redirect('/signIn');
+    }
+
+    const passwordIsCorrect = await user.hasMatchingPassword(
+        existingUser.password
+    );
+
+    if (!passwordIsCorrect) {
+        res.redirect('/signIn');
+        return;
+    }
+
+    authUtil.createUserSession(req, existingUser, function () {
+        res.redirect('/');
+    });
+}
+
 module.exports = {
-    getHome: getHome,
+    //getHome: getHome,
     getSignUp: getSignUp,
     createAccount: createAccount,
     getSignIn: getSignIn,
+    logIn: logIn
 }

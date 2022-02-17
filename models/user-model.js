@@ -28,13 +28,19 @@ class User {
         });
     }
 
-    async userHaveSameEmail() {
+    getyUserSameEmail() {
+        return db.getDb().collection('users').findOne({ email: this.email });
+    }
 
+    hasMatchingPassword(hashedPassword) {
+        return bcrypt.compare(this.password, hashedPassword);
     }
 
     async existingUser() {
 
     }
+
+
 }
 
 module.exports = User;
