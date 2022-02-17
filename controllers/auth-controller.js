@@ -55,10 +55,16 @@ async function logIn(req, res) {
     });
 }
 
+function logOut(req, res) {
+    authUtil.destroyUserAuthSession(req);
+    res.redirect('/signIn');
+}
+
 module.exports = {
     //getHome: getHome,
     getSignUp: getSignUp,
     createAccount: createAccount,
     getSignIn: getSignIn,
-    logIn: logIn
+    logIn: logIn,
+    logOut: logOut
 }

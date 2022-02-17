@@ -13,4 +13,6 @@ router.get('/signIn', authContr.getSignIn);
 
 router.post('/logIn', authContr.logIn);
 
+router.post('/logOut', authContr.logOut);
+
 module.exports = router;
