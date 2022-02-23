@@ -2,23 +2,29 @@
 <link rel="stylesheet" href="/styles/form.css">
 <link rel="stylesheet" href="/styles/auth.css">
 </head>
-<%- include('../../shared/includes/nav-bar') %>
+<%- include('../../shared/includes/nav-bar-header') %>
 <body>
     <main>
         <h1>Create New Account</h1>
+        <% if(inputData.errorMessage) { %>
+            <div class="alert">
+                <h2 >Invalid credentials!</h2>
+                <p><%= inputData.errorMessage %></p>
+            </div>
+        <% } %>
         <form action="/signUp" method="POST">
             <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             <div>
                 <label for="email">Enter your email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<%= inputData.email %>" required>
             </div>
             <div>
                 <label for="email-confirm">Confirm your email:</label>
-                <input type="email" id="email-confirm" name="email-confirm" required>
+                <input type="email" id="email-confirm" name="email-confirm" value="<%= inputData.confirmEmail %>" required>
             </div>
             <div>
                 <label for="password">Enter a password:</label>
-                <input type="password" id="password" name="password" minlength="6" required>
+                <input type="password" id="password" name="password" minlength="6" value="<%= inputData.password %>" required>
             </div>
             <div>
                 <label for="password-confirm">confirm your password:</label>
@@ -27,11 +33,11 @@
             <hr>
             <div>
                 <label for="full-name">Enter your full name:</label>
-                <input type="text" id="full-name" name="full-name" required>
+                <input type="text" id="full-name" name="full-name" value="<%= inputData.fullname %>" required>
             </div>
             <div>
                 <label for="street">Street:</label>
-                <input type="text" id="street" name="street" required>
+                <input type="text" id="street" name="street" value="<%= inputData.street %>" required>
             </div>
             <div>
                 <label for="postal-code">Postal Code:</label>
@@ -41,11 +47,12 @@
                 name="postal-code" 
                 minlength="5"
                 maxlength="5"
+                value="<%= inputData.postal %>" 
                 required>
             </div>
             <div>
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city" required>
+                <input type="text" id="city" name="city" value="<%= inputData.city %>" required>
             </div>
             <button class="btn">Sign Up</button>
             <p id="switch-form"><a href="/signIn">Sign In instead</a></p>

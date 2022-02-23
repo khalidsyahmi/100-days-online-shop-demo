@@ -2,19 +2,25 @@
 <link rel="stylesheet" href="/styles/form.css">
 <link rel="stylesheet" href="/styles/auth.css">
 </head>
-<%- include('../../shared/includes/nav-bar') %>
+<%- include('../../shared/includes/nav-bar-header') %>
 <body>
     <main>
         <h1>Sign In</h1>
-        <form action="/logIn" method="POST">
+        <% if(inputData.errorMessage) { %>
+            <div class="alert">
+                <h2 >Invalid credentials!</h2>
+                <p><%= inputData.errorMessage %></p>
+            </div>
+        <% } %>
+                <form action="/logIn" method="POST">
             <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             <div>
                 <label for="email">Enter your email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" value="<%= inputData.email %>" required>
             </div>
             <div>
                 <label for="password">Enter a password:</label>
-                <input type="password" id="password" name="password" minlength="6" required>
+                <input type="password" id="password" name="password" minlength="6" value="<%= inputData.password %>" required>
             </div>
             <hr>
             <button class="btn">Log In</button>

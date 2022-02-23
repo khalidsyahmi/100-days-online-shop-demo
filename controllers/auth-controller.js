@@ -8,7 +8,20 @@ const sessionFlash = require('../util/session-flash');
 } */
 
 function getSignUp(req, res) {
-    res.render('customer/auth/signUp');
+    let sessionData = sessionFlash.getSessionData(req);
+
+    if (!sessionData) {
+        sessionData = {
+            email: '',
+            confirmEmail: '',
+            password: '',
+            fullname: '',
+            street: '',
+            postal: '',
+            city: ''
+        }
+    }
+    res.render('customer/auth/signUp', { inputData: sessionData });
 }
 
 async function createAccount(req, res, next) {
@@ -21,7 +34,9 @@ async function createAccount(req, res, next) {
     //key value pairs can be spread in req data
     const enteredData = {
         email: enteredEmail,
+        confirmEmail: userData["email-confirm"],
         password: enteredPassword,
+        // enteredPassword: userData["password-confirm"],
         fullname: req.body['full-name'],
         street: req.body.street,
         postal: req.body['postal-code'],
@@ -88,7 +103,15 @@ async function createAccount(req, res, next) {
 }
 
 function getSignIn(req, res) {
-    res.render('customer/auth/signIn');
+    let sessionData = sessionFlash.getSessionData(req);
+
+    if (!sessionData) {
+        sessionData = {
+            email: '',
+            password: ''
+        }
+    }
+    res.render('customer/auth/signIn', { inputData: sessionData });
 }
 
 async function logIn(req, res) {
