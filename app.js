@@ -9,8 +9,9 @@ const db = require("./database/database");
 const authRoute = require('./routes/auth-route');
 const productsRoutes = require('./routes/products-routes');
 const baseRoutes = require('./routes/base-routes');
-const checkAuthStatus = require('./middlewares/check-auth');
+const adminRoutes = require('./routes/admin-routes');
 
+const checkAuthStatus = require('./middlewares/check-auth');
 const csrfMW = require('./middlewares/csrf-token-mw');
 const errMW = require('./middlewares/error-handler');
 
@@ -35,6 +36,7 @@ app.use(checkAuthStatus);
 app.use(baseRoutes);
 app.use(authRoute);
 app.use(productsRoutes);
+app.use('/admin',adminRoutes);
 
 app.use(errMW);
 
