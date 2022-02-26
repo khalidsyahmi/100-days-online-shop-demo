@@ -13,7 +13,13 @@
           </p>
         </section>
         <section>
-          <p>A list of products...</p>
+          <ul id="products-grid">
+            <% for (const product of products) { %>
+              <li>
+                <%- include('includes/product-items', { product: product }) %>
+              </li>
+            <% } %>
+          </ul>
         </section>
     </main>
 <%- include('../../shared/includes/footer') %>
