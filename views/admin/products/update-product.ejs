@@ -1,0 +1,10 @@
+<%- include('../../shared/includes/head', {dynamicTitle: 'Update Product'}) %>
+<link rel="stylesheet" href="/styles/form.css">
+</head>
+<%- include('../../shared/includes/nav-bar-header') %>
+<body>
+    <main>
+      <h1>Update Product</h1>
+      <%- include('includes/product-form', { submitPath: '/admin/products/' + product.id, product: product, imageRequired: false }) %>
+    </main>
+<%- include('../../shared/includes/footer') %>
