@@ -1,12 +1,20 @@
 <%- include('../../shared/includes/head', {dynamicTitle: 'Catalogue'}) %>
 <link rel="stylesheet" href="/styles/form.css">
 <link rel="stylesheet" href="/styles/auth.css">
+<link rel="stylesheet" href="/styles/products.css">
+
 </head>
 <%- include('../../shared/includes/nav-bar-header') %>
 <body>
     <main>
-        <h1>Product catalogue</h1>
-        <p>A list of products ...</p>
+        <h1>All Products</h1>
+        <ul id="products-grid">
+          <% for (const product of products) { %>
+            <li>
+              <%- include('../../shared/includes/product-items', { product: product }) %>
+            </li>
+          <% } %>
+        </ul>
     </main>
 
 <%- include('../../shared/includes/footer') %>

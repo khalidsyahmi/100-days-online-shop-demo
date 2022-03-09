@@ -11,6 +11,7 @@ const productsRoutes = require('./routes/products-routes');
 const baseRoutes = require('./routes/base-routes');
 const adminRoutes = require('./routes/admin-routes');
 
+const adminRouteGuard = require('./middlewares/route-guard');
 const checkAuthStatus = require('./middlewares/check-auth');
 const csrfMW = require('./middlewares/csrf-token-mw');
 const errMW = require('./middlewares/error-handler');
@@ -37,6 +38,7 @@ app.use(checkAuthStatus);
 app.use(baseRoutes);
 app.use(authRoute);
 app.use(productsRoutes);
+app.use(adminRouteGuard);
 app.use('/admin',adminRoutes);
 
 app.use(errMW);

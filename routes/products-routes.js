@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const authContr = require('../controllers/auth-controller');
+const productContr = require('../controllers/products-controller');
 
-router.get('/products', function (req, res) {
+/* router.get('/products', function (req, res) {
     res.render('customer/products/all-products');
-});
+}); */
+
+router.get('/products', productContr.getAllProducts);
 
 module.exports = router;
