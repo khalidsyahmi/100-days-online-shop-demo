@@ -11,10 +11,11 @@ const productsRoutes = require('./routes/products-routes');
 const baseRoutes = require('./routes/base-routes');
 const adminRoutes = require('./routes/admin-routes');
 
-const adminRouteGuard = require('./middlewares/route-guard');
-const checkAuthStatus = require('./middlewares/check-auth');
+const adminRouteGuardMW = require('./middlewares/route-guard');
+const checkAuthStatusMW = require('./middlewares/check-auth');
 const csrfMW = require('./middlewares/csrf-token-mw');
 const errMW = require('./middlewares/error-handler');
+const cartMW = require('./middlewares/cart');
 
 const app = express();
 
@@ -32,13 +33,15 @@ app.use(expressSession(sessionConfig));
 
 app.use(csrf());
 
+app.use(cartMW);
+
 app.use(csrfMW);
-app.use(checkAuthStatus);
+app.use(checkAuthStatusMW);
 
 app.use(baseRoutes);
 app.use(authRoute);
 app.use(productsRoutes);
-app.use(adminRouteGuard);
+app.use(adminRouteGuardMW);
 app.use('/admin',adminRoutes);
 
 app.use(errMW);
