@@ -1,0 +1,11 @@
+<article class="cart-item">
+    <div>
+        <h2><%= item.product.title %></h2>
+        <p>$<%= item.totalPrice %> <span class="cart-product-price">($<%= item.product.price %>)</span></p>
+    </div>
+    
+    <div class="cart-item-management">
+        <input type="number" value="<%= item.quantity%>" required>
+        <button class="btn btn-alt">update</button>
+    </div>
+</article>
