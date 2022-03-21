@@ -10,6 +10,7 @@ const authRoute = require('./routes/auth-route');
 const productsRoutes = require('./routes/products-routes');
 const baseRoutes = require('./routes/base-routes');
 const adminRoutes = require('./routes/admin-routes');
+const cartRoutes = require('./routes/cart-route');
 
 const adminRouteGuardMW = require('./middlewares/route-guard');
 const checkAuthStatusMW = require('./middlewares/check-auth');
@@ -25,6 +26,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use('/products/assets/',express.static('images'));
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 /* const mongodbSessionStore = createSessionConfig.sessionKey(expressSession);
 app.use(expressSession(createSessionConfig.headerKey(mongodbSessionStore))); */
@@ -41,6 +43,7 @@ app.use(checkAuthStatusMW);
 app.use(baseRoutes);
 app.use(authRoute);
 app.use(productsRoutes);
+app.use('/cart',cartRoutes);
 app.use(adminRouteGuardMW);
 app.use('/admin',adminRoutes);
 
