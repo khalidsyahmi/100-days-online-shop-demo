@@ -18,6 +18,7 @@ const checkAuthStatusMW = require('./middlewares/check-auth');
 const csrfMW = require('./middlewares/csrf-token-mw');
 const errMW = require('./middlewares/error-handler');
 const cartMW = require('./middlewares/cart');
+const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
 
 const app = express();
 
@@ -29,14 +30,16 @@ app.use('/products/assets/',express.static('images'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
 /* const mongodbSessionStore = createSessionConfig.sessionKey(expressSession);
 app.use(expressSession(createSessionConfig.headerKey(mongodbSessionStore))); */
 const sessionConfig = createSessionConfig();
-app.use(expressSession(sessionConfig));
 
+app.use(expressSession(sessionConfig));
 app.use(csrf());
 
 app.use(cartMW);
+app.use(updateCartPricesMiddleware);
 
 app.use(csrfMW);
 app.use(checkAuthStatusMW);
