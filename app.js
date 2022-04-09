@@ -19,6 +19,7 @@ const csrfMW = require('./middlewares/csrf-token-mw');
 const errMW = require('./middlewares/error-handler');
 const cartMW = require('./middlewares/cart');
 const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
+const notFoundMiddleware = require('./middlewares/not-found');
 
 const app = express();
 
@@ -48,9 +49,11 @@ app.use(baseRoutes);
 app.use(authRoute);
 app.use(productsRoutes);
 app.use('/cart',cartRoutes);
-app.use(adminRouteGuardMW);
-app.use('/orders', ordersRoutes);
-app.use('/admin',adminRoutes);
+app.use('/orders', adminRouteGuardMW, ordersRoutes);
+app.use('/admin', adminRouteGuardMW, adminRoutes);
+
+
+app.use(notFoundMiddleware);
 
 app.use(errMW);
 
