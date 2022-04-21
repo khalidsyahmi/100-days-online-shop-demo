@@ -21,13 +21,19 @@ const cartMW = require('./middlewares/cart');
 const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
 const notFoundMiddleware = require('./middlewares/not-found');
 
+let port = 3000;
+
+if (process.env.PORT) {
+  port = process.env.PORT
+}
+
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
-app.use('/products/assets/',express.static('images'));
+app.use('/products/assets/', express.static('images'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -48,7 +54,7 @@ app.use(checkAuthStatusMW);
 app.use(baseRoutes);
 app.use(authRoute);
 app.use(productsRoutes);
-app.use('/cart',cartRoutes);
+app.use('/cart', cartRoutes);
 app.use('/orders', adminRouteGuardMW, ordersRoutes);
 app.use('/admin', adminRouteGuardMW, adminRoutes);
 
@@ -57,9 +63,11 @@ app.use(notFoundMiddleware);
 
 app.use(errMW);
 
-db.connectToDatabase().then(function () {
-  app.listen(3000);
-}).catch(function (err) {
-  console.log('failed to connect to database!');
-  console.log(err);
-});
+db.connectToDatabase()
+  .then(function () {
+    app.listen(port);
+  })
+  .catch(function (err) {
+    console.log('failed to connect to database!');
+    console.log(err);
+  });
