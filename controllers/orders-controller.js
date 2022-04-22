@@ -1,6 +1,12 @@
 const Order = require('../models/order-model');
 const User = require('../models/user-model');
 
+let mongodbUrl = 'http://localhost:3000';
+
+if (process.env.MONGODB_URL) {
+  mongodbUrl = process.env.MONGODB_URL;
+}
+
 const stripe = require('stripe')('sk_test_51K9UzpH3uarJZ1YZcMYjMFDMhq2MSvK6YSA3j6IlAMj7QrjqiZOD7NOypQPK8Cq8jkefT79bgr3W4N5wyPWl9lj400iajuKX9c');
 
 async function getOrders(req, res, next) {
@@ -17,11 +23,6 @@ async function getOrders(req, res, next) {
 async function addOrder(req, res, next) {
   const cart = res.locals.cart;
 
-  let mongodbUrl = 'http://localhost:3000';
-
-  if (process.env.MONGODB_URL) {
-    mongodbUrl = process.env.MONGODB_URL;
-  }
 
   let userDocument;
   try {
