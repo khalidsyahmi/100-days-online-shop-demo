@@ -1,8 +1,10 @@
 const Order = require('../models/order-model');
 const User = require('../models/user-model');
 
-let mongodbUrl = 'http://localhost:3000';
+let mongodbUrl = 'mongodb://127.0.0.1:27017';
 
+/* 'http://localhost:3000'
+ */
 if (process.env.MONGODB_URL) {
   mongodbUrl = process.env.MONGODB_URL;
 }
