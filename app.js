@@ -20,6 +20,7 @@ const errMW = require('./middlewares/error-handler');
 const cartMW = require('./middlewares/cart');
 const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
 const notFoundMiddleware = require('./middlewares/not-found');
+const enableCors = require('./middlewares/cors');
 
 let port = 3000;
 
@@ -27,6 +28,7 @@ if (process.env.PORT) {
   port = process.env.PORT
 }
 
+app.use(enableCors);
 const app = express();
 
 app.set("view engine", "ejs");
