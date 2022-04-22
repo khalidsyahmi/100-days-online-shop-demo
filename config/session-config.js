@@ -3,10 +3,9 @@ const mongodbStore = require("connect-mongodb-session");
 
 let mongodbUrl = 'mongodb://127.0.0.1:27017';
 
-if (process.env.MONGODB_URL){
-  mongodbUrl = process.env.MONGODB_URL;
+if (process.env.MONGODB_URL) {
+    mongodbUrl = process.env.MONGODB_URL;
 }
-
 
 //store function
 function createSessionStore() {

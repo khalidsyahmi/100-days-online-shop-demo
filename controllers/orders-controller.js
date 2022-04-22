@@ -3,7 +3,7 @@ const User = require('../models/user-model');
 
 const stripe = require('stripe')('sk_test_51K9UzpH3uarJZ1YZcMYjMFDMhq2MSvK6YSA3j6IlAMj7QrjqiZOD7NOypQPK8Cq8jkefT79bgr3W4N5wyPWl9lj400iajuKX9c');
 
-async function getOrders(req, res,next) {
+async function getOrders(req, res, next) {
   try {
     const orders = await Order.findAllForUser(res.locals.uid);
     res.render('customer/orders/all-orders', {
@@ -16,6 +16,12 @@ async function getOrders(req, res,next) {
 
 async function addOrder(req, res, next) {
   const cart = res.locals.cart;
+
+  let mongodbUrl = 'http://localhost:3000';
+
+  if (process.env.MONGODB_URL) {
+    mongodbUrl = process.env.MONGODB_URL;
+  }
 
   let userDocument;
   try {
@@ -37,37 +43,37 @@ async function addOrder(req, res, next) {
 
   //stripe checkout
   const session = await stripe.checkout.sessions.create({
-    line_items: cart.items.map(function(item) {
+    line_items: cart.items.map(function (item) {
       return {
-        price_data:{
-          currency:'usd',
-          product_data:{
+        price_data: {
+          currency: 'usd',
+          product_data: {
             name: item.product.title
           },
           unit_amount_decimal: +item.product.price.toFixed(2) * 100
         },
         quantity: 1
-       } 
+      }
     }),
     mode: 'payment',
-    success_url: `http://localhost:3000/orders/success`,
-    cancel_url: `http://localhost:3000/orders/failure`,
+    success_url: `${mongodbUrl}/orders/success`,
+    cancel_url: `${mongodbUrl}/orders/failure`,
   });
 
   res.redirect(303, session.url);
 }
 
-function getSuccess(req,res){
-res.render('customer/orders/success');
+function getSuccess(req, res) {
+  res.render('customer/orders/success');
 }
 
-function getFailure(req,res){
+function getFailure(req, res) {
   res.render('customer/orders/failure');
-  }
+}
 
 module.exports = {
   addOrder: addOrder,
   getOrders: getOrders,
-  getSuccess:getSuccess,
-  getFailure:getFailure
+  getSuccess: getSuccess,
+  getFailure: getFailure
 };
