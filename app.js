@@ -3,6 +3,8 @@ const path = require("path");
 const express = require("express");
 const csrf = require("csurf");
 const expressSession = require("express-session");
+const cors = require('cors');
+
 const createSessionConfig = require('./config/session-config');
 
 const db = require("./database/database");
@@ -28,8 +30,10 @@ if (process.env.PORT) {
   port = process.env.PORT
 }
 
-app.use(enableCors);
 const app = express();
+
+app.use(enableCors);
+app.use(cors());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
