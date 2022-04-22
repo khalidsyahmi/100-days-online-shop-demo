@@ -1,14 +1,6 @@
 const Order = require('../models/order-model');
 const User = require('../models/user-model');
 
-let mongodbUrl = 'mongodb://127.0.0.1:27017';
-
-/* 'http://localhost:3000'
- */
-if (process.env.MONGODB_URL) {
-  mongodbUrl = process.env.MONGODB_URL;
-}
-
 const stripe = require('stripe')('sk_test_51K9UzpH3uarJZ1YZcMYjMFDMhq2MSvK6YSA3j6IlAMj7QrjqiZOD7NOypQPK8Cq8jkefT79bgr3W4N5wyPWl9lj400iajuKX9c');
 
 async function getOrders(req, res, next) {
@@ -24,17 +16,24 @@ async function getOrders(req, res, next) {
 
 async function addOrder(req, res, next) {
   const cart = res.locals.cart;
-
-
+  
+  let mongodbUrl = 'mongodb://127.0.0.1:27017';
+  
+  /* 'http://localhost:3000'
+   */
+  if (process.env.MONGODB_URL) {
+    mongodbUrl = process.env.MONGODB_URL;
+  }
+    
   let userDocument;
   try {
     userDocument = await User.findById(res.locals.uid);
   } catch (error) {
     return next(error);
   }
-
+  
   const order = new Order(cart, userDocument);
-
+  
   try {
     await order.save();
   } catch (error) {
