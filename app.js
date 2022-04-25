@@ -3,7 +3,7 @@ const path = require("path");
 const express = require("express");
 const csrf = require("csurf");
 const expressSession = require("express-session");
-const cors = require('cors');
+const cors = require('cors',{origin:true});
 
 const createSessionConfig = require('./config/session-config');
 
