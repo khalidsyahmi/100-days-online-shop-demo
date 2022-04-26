@@ -51,6 +51,7 @@ const sessionConfig = createSessionConfig();
 app.use(expressSession(sessionConfig));
 app.use(csrf());
 
+//middlewares
 app.use(cartMW);
 app.use(updateCartPricesMiddleware);
 
